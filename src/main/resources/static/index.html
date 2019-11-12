@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tilgungsplan</title>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Tilgungsrechner</h1>
+        <div id="requestForm">
+            <form id="formSection">
+                <div class="form-group">
+                    <label for="startDate">Auszahlungsdatum</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="startDate" required>
+                        <div class="invalid-feedback">
+                            Dies ist ein Pflichtfeld!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="loan">Darlehensbetrag</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="loan" aria-describedby="inputLoan" required>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputLoan">€</span>
+                        </div>
+                        <div class="invalid-feedback">
+                            Dies ist ein Pflichtfeld!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="interestRate">Sollzinssatz (in Prozent)</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="interestRate" aria-describedby="inputInterestRate" required>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputInterestRate">%</span>
+                            </div>
+                            <div class="invalid-feedback">
+                                Dies ist ein Pflichtfeld!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="durationFixedInterest">Dauer der Zinsbindung (in Jahren)</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="durationFixedInterest" required>
+                            <div class="invalid-feedback">
+                                Dies ist ein Pflichtfeld!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="initialRepayment">Anfängliche Tilgung (in Prozent)</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="initialRepayment" aria-describedby="inputInitialRepayment" required>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputInitialRepayment">%</span>
+                        </div>
+                        <div class="invalid-feedback">
+                            Dies ist ein Pflichtfeld!
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" id="btnGetRepaymentPlan" class="btn btn-primary btn-lg btn-block">Tilgungsplan Berechnen</button>
+            </form>
+        </div>
+
+        <div id="repaymentPlan" style="margin-top: 20px;">
+            <h1>Tilgungsplan</h1>
+            <div id="errorMessage" class="alert alert-danger" role="alert">
+                error generating repayment plans!
+            </div>
+            <table id="tableRepaymentPlan" class="table table-hover table-striped text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Datum</th>
+                        <th scope="col">Restschuld</th>
+                        <th scope="col">Zinsen</th>
+                        <th scope="col">Tilgung(+) / Auszahlung(-)</th>
+                        <th scope="col">Rate</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</html>
